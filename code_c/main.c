@@ -19,6 +19,7 @@ int main(void)
 {
 
 	printf("Hello we are CMKN\n"); //petit bonjour x)
+	printf("test by momo\n");
 	
 		SDL_Rect position;
 
