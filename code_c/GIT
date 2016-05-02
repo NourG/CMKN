@@ -1,0 +1,9 @@
+1- sudo git pull (pour importer les changements)
+2 - sudo gedit nom.c (pour lancer le fichier a modifier)
+enregrister le fichier
+3-git status (pour voir les modifs en rouge=)
+4- sudo git add nom.c (pour ajouter le fichier)
+5-git status (pour voir les modifs en vert)
+6- sudo git commit -a -m "le commentaire"
+7- sudo git push
+pour copier quelque chose dans le repertoire : sudo cp nom.fichier distination
