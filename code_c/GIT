@@ -13,3 +13,7 @@ Il faut installer les bibliotheque tff et freetype
 voila commande : sudo apt-get install libsdl-ttf2.0 libsdl-ttf2.0-dev
  et sudo apt-get install 
 gcc 'sdl-config --cflags --libs' -lSDL_image -lSDL_ttf -o main.c
+
+compilation : sudo gcc main.c -lSDL -o main -lSDL_image -lSDL_ttf 
+
+Excution : sudo ./main
