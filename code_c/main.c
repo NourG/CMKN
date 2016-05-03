@@ -21,7 +21,7 @@ tourne avec la bibliothéque SDL ==> sudo gcc main.c -lSDL -o main*/
 int main(void)
 {
 	int loop = 1;
-	char *txt_affic = {"voila la variable qui vas nous permetre d'afficher du texte a l'ecran "};
+	char *txt_affic ;
 	SDL_Surface *my_screen = NULL;
 //Iitialisation du pointeur
 
@@ -97,7 +97,7 @@ plan_labo=SDL_LoadBMP("salle_3D.bmp");
 			   case SDL_KEYDOWN:
 			       switch (evenement.key.keysym.sym)
 			           {
-						   case SDLK_a: //strcpy();
+						   case SDLK_a: strcpy(txt_affic,"a");
 							break;
 							case SDLK_b: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
 							break;
