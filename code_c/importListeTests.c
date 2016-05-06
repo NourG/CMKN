@@ -6,124 +6,196 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX 20
-#define sizedata 100
+
+#define MAX 15
+#define sizedataf 50
 
 typedef struct tests
 	{
 		int id;
-		char Type[MAX];
-		int duree;
-		int temperature;
-		int nbpiecetest;
-		struct Tests *suiv;
+		char type[MAX];
+		char duree[MAX];
+		char temperature[MAX];
+		//int nbpiecetest;
+		struct tests *suiv;
 	}TST;
 
-char* import_data_file(FILE *fic/*,TST *List_p*/);
-TST* Nouveau(char * ligne);
-void myread(char *data, size_t nb, FILE *fp);
-TST* Insert_liste(char* data, TST* maillon);
-char* test(char* data);
+
+
+TST* Insert_liste(TST* tete_list, TST* test);
+TST * Nouveau_test();
+TST* test_line(FILE* fic);
+void Aff(TST* T);
+TST* creerlist_file(FILE* fic);
+void Aff_list(TST* T);
+
+
 
 int main()
 	{
-		/*TST* nv=NULL;
-		TST* liste;*/
-		char data[50];
-		char* ligne;
-		//nv=Nouveau();
-		/*if(fich==NULL)
-			{
-				liste=import_file(fich,nv);	
-				printf("id=%d\n",liste->id);
-			}
-		
-				fich = fopen("listetests.txt","r");
-				if(fich!=NULL)
-					{
-						myread(data,2,fich);
-						ligne=data;
-					}
-		printf("ligne = [%s]",ligne);
-		fclose(fich);*/
-		FILE* fich=NULL;
-		import_data_file(fich);		
+	//TST* test=NULL;
+	TST* liste=NULL;
+	int f;
+	//TST* tete=NULL;
+	//tete=Nouveau_test();
+	FILE *fp;
 
+   	fp = fopen("listetests.txt","r");
+		
+	if(fp!=NULL)
+	{		//Insere le premier maillon dans la tete de liste
+		/*test=test_line(fp);
+		liste=Insert_liste(liste,test);	
+		tete=Insert_liste(tete,test);
+		Aff(liste);*/
+
+		liste=creerlist_file(fp);
+		Aff_list(liste);
+	}
+		
+	f=fclose(fp);
+	if(f!=0)
+	{
+		printf("PB fermeture fichier\n");
+	}	
 	return 0;
 	}
 
 
-TST * Nouveau(char * ligne)			//fct permettant la création d'un maillon. Maillon = test
+TST * Nouveau_test()			//fct permettant la création d'un maillon. Maillon = test
 	{ 
 		TST * N;
 		N=(TST*)malloc(sizeof(TST));
-		N->suiv=NULL;
 		if( N == NULL)
 			{
 				printf("\nPb malloc\n");
 			}
-		return N;				//Sinon on retourne le maillon vide
+		else
+		{
+			printf("Maillon ok\n");
+			N->suiv=NULL;
+			
+		}	
+		return N;			
 	}
 
 
-void myread(char *data, size_t nb, FILE *fp)		//recupere une ligne entière sans le '\n' à la fin
-{
-    char *pt;
-    fgets(data, nb, fp);
-    if ((pt=strchr(data, '\n')) != NULL) *pt='\0';
+TST* Insert_liste(TST* tete_list, TST* test)
+	{
+	/* "tete_list" pointeur tête, "test" élément à insérer */
+		if(test==NULL)
+		{
+			printf("PB [Insert_liste]maillon de test\n");
+			return NULL;
+		}
+		else
+		{
+			if(tete_list==NULL)			/* cas liste vide */
+			{
+				tete_list=test;
+				printf("Insérer en tete de liste\n");
+				
+				
+			}
+			else 
+			{
+				
+				test->suiv=tete_list;
+				tete_list=test;
+				printf("test inséré dans la liste\n");
+			}
+			
+
+		}
+		return tete_list;
+		
+	}
+
+TST* test_line(FILE* fic)				//fct qui retourne un maillon de type test à partir de la premiere ligne du fichier
+	{
+		
+		TST* test1;
+		char ligne[sizedataf];	
+		char* tmp;			//pointeur/extracteur  de chaine tampon
+		char*pt;			//pointeur 2 de chaine(type test) 
+		char*pt2;			//pointeur 3 de chaine(duree test)
+		char*pt3;			//pointeur 4 de chaine(temperature test)
+		test1=Nouveau_test();
+		
+		
+						fgets(ligne,sizedataf,fic);			//retire la 1ere ligne avec \n
+						ligne[strlen(ligne)-1]='\0';			//"		      " sans "
+						tmp=strtok_r(ligne," ",&pt);//comme fonction strtok() mais pas à pas pour chaque delimiteur d'espace blanc 
+						test1->id=atoi(tmp);			
+						tmp=strtok_r(pt," ",&pt2);
+						strcpy(test1->type,tmp);
+						tmp=strtok_r(pt2," ",&pt3);
+						strcpy(test1->duree,tmp);
+						tmp=strtok_r(pt3," ",&tmp);
+						strcpy(test1->temperature,tmp);	
+
+					
+					
+		return test1;
+	}
+
+void Aff_test1(TST* T)
+	{ 
+	printf("id=%d\ttypetest=[%s]\tduree=[%s]\ttemperature=[%s]\n",T->id,T->type,T->duree,T->temperature);
+}
+
+						
+TST* creerlist_file(FILE* fic)			//crée une liste de test à partir de toutes les lignes d'un fichier
+	{
+	
+		TST* test1;
+		TST* tete=NULL;
+		char ligne[sizedataf];	
+		char* tmp;			//pointeur/extracteur  de chaine tampon
+		char*pt;			//pointeur 2 de chaine(type test) 
+		char*pt2;			//pointeur 3 de chaine(duree test)
+		char*pt3;			//pointeur 4 de chaine(temperature test)
+				
+						while(fgets(ligne,sizedataf,fic)!=NULL)		//retire la 1ere ligne avec \n
+						{
+						ligne[strlen(ligne)-1]='\0';		//"		      " sans "
+						test1=Nouveau_test();
+						tmp=strtok_r(ligne," ",&pt);//= fonction strtok() mais pas à pas pour chaque delimiteur d'espace blanc 
+						
+						test1->id=atoi(tmp);			
+						tmp=strtok_r(pt," ",&pt2);
+						strcpy(test1->type,tmp);
+						tmp=strtok_r(pt2," ",&pt3);
+						strcpy(test1->duree,tmp);
+						tmp=strtok_r(pt3," ",&tmp);
+						strcpy(test1->temperature,tmp);	
+						tete=Insert_liste(tete,test1);	
+						}
+					//Aff_list(tete);
+						
+	return tete;			//tete = @liste de tests
+	}
+
+
+
+
+
+void Aff_list(TST* T)
+	{ int i_cpt = 0;
+		printf("***************************LISTE DE TESTS*********************************\n");
+	while(T != NULL)
+	{ 
+		
+		printf("id=%d\ttypetest=[%s]\tduree=[%s]\ttemperature=[%s]\n",T->id,T->type,T->duree,T->temperature);
+		i_cpt++;
+		T = T->suiv;
+	}
+	if(i_cpt == 0)
+	printf("\n Liste vide !!");
+	
 }
 
 
-char* import_data_file(FILE *fic/*,TST *List_p*/)		//retourne La liste de tests dans une chaine de caractère si OK sinon -1
-	{
-		int resread;
-		char* List_p[sizedata];
-		char *lst;
-		
-				fic = fopen("listetests.txt","r");
-				if(fic!=NULL)
-					{
-												
-							resread = fread(List_p,sizeof(TST),10,fic);
-							lst=List_p;
-							printf("%s\n",lst);
-							fclose(fic);
-							//myread(
-							
-							
-							if(resread==0)				//si 0 élem retourné par fread alors sortir de la boucle
-								{
-									fclose(fic);
-									return NULL;
-								}
-						}	
-						
-						
-		return lst;
-	}
-
-char* test(char* data)				//fonction qui retourne une ligne de data(de impor_data_file) correspondant à un test particulier pour pouvoir en crée un nouveau maillon dans la liste chainée de tests
-	{
-		int i,j;
-		char *pt;
-		for(i=0;i<sizedata;i++)
-		{
-				
-				/*if ((pt=strchr(data, '\n')) != NULL)
-				{
-					*pt='\0';
-					
-				}*/
-				j=strlen("data");
-				printf("longueur=%d\n",j);
-		}
-	return NULL;
-	}
-
-TST* Insert_liste(char* data, TST* maillon)
-	{
-		return NULL;
-	}
 
 						
 

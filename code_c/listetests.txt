@@ -1,0 +1,2 @@
+1 etuve1 12h 50°c
+2 four 5h 80°c
