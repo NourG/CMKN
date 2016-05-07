@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
@@ -21,7 +20,7 @@ tourne avec la bibliothéque SDL ==> sudo gcc main.c -lSDL -o main*/
 int main(void)
 {
 	int loop = 1;
-	char *txt_affic ;
+	char *txt_affic = {"voila la variable qui vas nous permetre d'afficher du texte a l'ecran "};
 	SDL_Surface *my_screen = NULL;
 //Iitialisation du pointeur
 
@@ -97,59 +96,9 @@ plan_labo=SDL_LoadBMP("salle_3D.bmp");
 			   case SDL_KEYDOWN:
 			       switch (evenement.key.keysym.sym)
 			           {
-						   case SDLK_a: strcpy(txt_affic,"a");
+						   case SDLK_a: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
 							break;
-							case SDLK_b: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_c: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_d: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_e: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_f: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_g: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_h: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_i: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_j: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_k: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_l: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_m: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_n: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_o: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_p: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_r: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_s: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_t: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_u: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_v: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_w: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_x: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_y: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_z: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-							case SDLK_ESCAPE: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
-							break;
-						default : break;
+							default : break;
 					    }
 
 			}
@@ -165,5 +114,4 @@ plan_labo=SDL_LoadBMP("salle_3D.bmp");
 		SDL_Quit(); //fermer SDL important pour ne pas saturer la mémoire !!!!!
 	return 0;
 }
-
 

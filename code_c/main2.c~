@@ -21,7 +21,7 @@ tourne avec la bibliothéque SDL ==> sudo gcc main.c -lSDL -o main*/
 int main(void)
 {
 	int loop = 1;
-	char *txt_affic ;
+	char txt_affic = NULL ;
 	SDL_Surface *my_screen = NULL;
 //Iitialisation du pointeur
 
@@ -79,33 +79,49 @@ plan_labo=SDL_LoadBMP("salle_3D.bmp");
 
 		police = TTF_OpenFont("bebas.ttf", 30);  // ici on charge la police dans le pointeur "police" et on donne une taille de police 30
 
-		texte = TTF_RenderText_Blended(police ,txt_affic ,couleurNoire);
+		texte = TTF_RenderText_Blended(police ,&txt_affic ,couleurNoire);
 
 		SDL_BlitSurface(plan_labo,NULL,my_screen,NULL);
 		SDL_BlitSurface(texte,NULL,my_screen, &position);
    		SDL_Flip(my_screen);
-
-
+		
 		while(loop) //boucle "pseudo" infinie
 		{
 			SDL_WaitEvent(&evenement); //fonction qui gere les evenement
+			
 			switch(evenement.type)
 			{
 			  case SDL_QUIT : loop = 0;
+			 
 			    break;
 
 			   case SDL_KEYDOWN:
 			       switch (evenement.key.keysym.sym)
 			           {
-						   case SDLK_a: strcpy(txt_affic,"a");
+						   case SDLK_a: strcpy(&txt_affic,"a");
+						   texte = TTF_RenderText_Blended(police ,&txt_affic ,couleurNoire);
+						   SDL_BlitSurface(texte,NULL,my_screen, &position);
+							SDL_Flip(my_screen);
 							break;
-							case SDLK_b: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
+							case SDLK_b: strcpy(&txt_affic,"b");
+							texte = TTF_RenderText_Blended(police ,&txt_affic ,couleurNoire);
+						   SDL_BlitSurface(texte,NULL,my_screen, (&position)+1);
+							SDL_Flip(my_screen);
 							break;
-							case SDLK_c: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
+							case SDLK_c: strcpy(&txt_affic,"c");
+							texte = TTF_RenderText_Blended(police ,&txt_affic ,couleurNoire);
+						   SDL_BlitSurface(texte,NULL,my_screen, (&position)+2);
+							SDL_Flip(my_screen);
 							break;
-							case SDLK_d: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
+							case SDLK_d: strcpy(&txt_affic,"d");
+							texte = TTF_RenderText_Blended(police ,&txt_affic ,couleurNoire);
+						   SDL_BlitSurface(texte,NULL,my_screen, (&position)+3);
+							SDL_Flip(my_screen);
 							break;
-							case SDLK_e: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
+							case SDLK_e: strcpy(&txt_affic,"e");
+							texte = TTF_RenderText_Blended(police ,&txt_affic ,couleurNoire);
+						   SDL_BlitSurface(texte,NULL,my_screen, (&position)+4);
+							SDL_Flip(my_screen);
 							break;
 							case SDLK_f: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
 							break;
@@ -165,5 +181,4 @@ plan_labo=SDL_LoadBMP("salle_3D.bmp");
 		SDL_Quit(); //fermer SDL important pour ne pas saturer la mémoire !!!!!
 	return 0;
 }
-
 

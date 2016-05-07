@@ -21,14 +21,14 @@ tourne avec la bibliothéque SDL ==> sudo gcc main.c -lSDL -o main*/
 int main(void)
 {
 	int loop = 1;
-	char *txt_affic ;
+	char txt_affic = NULL ;
 	SDL_Surface *my_screen = NULL;
 //Iitialisation du pointeur
 
-	SDL_Surface *plan_labo=NULL,  *texte =NULL;
+	SDL_Surface *plan_labo=NULL,  *texte =NULL, *sprite;
 //creation de notre premiere surface   *test_fini=NULL, *test_futur=NULL, *ecran_ordi=NULL,
 
-	SDL_Rect position;
+	SDL_Rect position , posit_OP;
 // permet de declarer la position des fenetres selon X Y
 
 	SDL_Event evenement;
@@ -54,7 +54,7 @@ int main(void)
 	TTF_Init();
 // ici on demarre notre fonction TTF sans lui passer d'argument elle n'as pas besoin
 
-	/*if(TTF_Init() == -1)
+	if(TTF_Init() == -1)
 		{
 			fprintf(stderr, "Erreur d'initialisaiton de TTF_Init : %s\n ", TTF_GetError());
 			exit(EXIT_FAILURE);
@@ -69,6 +69,8 @@ int main(void)
 
 plan_labo=SDL_LoadBMP("salle_3D.bmp");
 
+sprite =SDL_LoadBMP("GAUCHE.bmp");
+
    		position.x = 20;
    		position.y = 400;
 // on initialise les variables de position
@@ -79,33 +81,49 @@ plan_labo=SDL_LoadBMP("salle_3D.bmp");
 
 		police = TTF_OpenFont("bebas.ttf", 30);  // ici on charge la police dans le pointeur "police" et on donne une taille de police 30
 
-		texte = TTF_RenderText_Blended(police ,txt_affic ,couleurNoire);
+		texte = TTF_RenderText_Blended(police ,&txt_affic ,couleurNoire);
 
 		SDL_BlitSurface(plan_labo,NULL,my_screen,NULL);
 		SDL_BlitSurface(texte,NULL,my_screen, &position);
    		SDL_Flip(my_screen);
-
-
+		
 		while(loop) //boucle "pseudo" infinie
 		{
 			SDL_WaitEvent(&evenement); //fonction qui gere les evenement
+			
 			switch(evenement.type)
 			{
 			  case SDL_QUIT : loop = 0;
+			 
 			    break;
 
 			   case SDL_KEYDOWN:
 			       switch (evenement.key.keysym.sym)
 			           {
-						   case SDLK_a: strcpy(txt_affic,"a");
+						   case SDLK_a: strcpy(&txt_affic,"a");
+						   texte = TTF_RenderText_Blended(police ,&txt_affic ,couleurNoire);
+						   SDL_BlitSurface(texte,NULL,my_screen, &position);
+							SDL_Flip(my_screen);
 							break;
-							case SDLK_b: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
+							case SDLK_b: strcpy(&txt_affic,"b");
+							texte = TTF_RenderText_Blended(police ,&txt_affic ,couleurNoire);
+						   SDL_BlitSurface(texte,NULL,my_screen, (&position)+1);
+							SDL_Flip(my_screen);
 							break;
-							case SDLK_c: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
+							case SDLK_c: strcpy(&txt_affic,"c");
+							texte = TTF_RenderText_Blended(police ,&txt_affic ,couleurNoire);
+						   SDL_BlitSurface(texte,NULL,my_screen, (&position)+2);
+							SDL_Flip(my_screen);
 							break;
-							case SDLK_d: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
+							case SDLK_d: strcpy(&txt_affic,"d");
+							texte = TTF_RenderText_Blended(police ,&txt_affic ,couleurNoire);
+						   SDL_BlitSurface(texte,NULL,my_screen, (&position)+3);
+							SDL_Flip(my_screen);
 							break;
-							case SDLK_e: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
+							case SDLK_e: strcpy(&txt_affic,"e");
+							texte = TTF_RenderText_Blended(police ,&txt_affic ,couleurNoire);
+						   	SDL_BlitSurface(texte,NULL,my_screen, (&position)+4);
+							SDL_Flip(my_screen);
 							break;
 							case SDLK_f: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
 							break;
@@ -147,7 +165,11 @@ plan_labo=SDL_LoadBMP("salle_3D.bmp");
 							break;
 							case SDLK_z: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
 							break;
-							case SDLK_ESCAPE: printf("code UNICODE de 'a ' : %i",evenement.key.keysym.unicode);
+							case SDLK_ESCAPE: printf("code UNICODE de 'a '",evenement.key.keysym.unicode);
+							case SDLK_LEFT:
+							posit_OP.x--;
+							SDL_BlitSurface(plan_labo,NULL,my_screen,&posit_OP);
+							SDL_Flip(my_screen);
 							break;
 						default : break;
 					    }
@@ -165,5 +187,4 @@ plan_labo=SDL_LoadBMP("salle_3D.bmp");
 		SDL_Quit(); //fermer SDL important pour ne pas saturer la mémoire !!!!!
 	return 0;
 }
-
 
