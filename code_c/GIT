@@ -17,3 +17,9 @@ gcc 'sdl-config --cflags --libs' -lSDL_image -lSDL_ttf -o main.c
 compilation : sudo gcc main.c -lSDL -o main -lSDL_image -lSDL_ttf 
 
 Excution : sudo ./main
+
+
+
+
+liens Utiles : regarde fct° txt_input
+https://openclassrooms.com/forum/sujet/sdl-ecrire-du-texte-soucis-pour-afficher-curseur
