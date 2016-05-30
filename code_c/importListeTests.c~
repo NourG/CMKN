@@ -24,6 +24,8 @@ typedef struct tests
 
 TST* Insert_liste(TST* tete_list, TST* test);
 TST * Nouveau_test();
+//TST* test_line(FILE* fic);
+//void Aff(TST* T);
 TST* creerlist_file(FILE* fic);
 void Aff_list(TST* T);
 
@@ -101,6 +103,38 @@ TST* Insert_liste(TST* tete_list, TST* test)
 		return tete_list;
 		
 	}
+
+/*TST* test_line(FILE* fic)				//fct qui retourne un maillon de type test à partir de la premiere ligne du fichier
+	{
+		
+		TST* test1;
+		char ligne[sizedataf];	
+		char* tmp;			//pointeur/extracteur  de chaine tampon
+		char*pt;			//pointeur 2 de chaine(type test) 
+		char*pt2;			//pointeur 3 de chaine(duree test)
+		char*pt3;			//pointeur 4 de chaine(temperature test)
+		test1=Nouveau_test();
+		
+		
+						fgets(ligne,sizedataf,fic);			//retire la 1ere ligne avec \n
+						ligne[strlen(ligne)-1]='\0';			//"		      " sans "
+						tmp=strtok_r(ligne," ",&pt);//comme fonction strtok() mais pas à pas pour chaque delimiteur d'espace blanc 
+						test1->id=atoi(tmp);			
+						tmp=strtok_r(pt," ",&pt2);
+						strcpy(test1->type,tmp);
+						tmp=strtok_r(pt2," ",&pt3);
+						strcpy(test1->duree,tmp);
+						tmp=strtok_r(pt3," ",&tmp);
+						strcpy(test1->temperature,tmp);
+					
+		return test1;
+	}*/
+
+
+/*void Aff_test1(TST* T)
+	{ 
+	printf("id=%d\ttypetest=[%s]\tduree=[%s]\ttemperature=[%s]\n",T->id,T->type,T->duree,T->temperature);
+}*/
 
 						
 TST* creerlist_file(FILE* fic)			//crée une liste de test à partir de toutes les lignes d'un fichier
