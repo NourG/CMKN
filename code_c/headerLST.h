@@ -3,15 +3,17 @@
 
 
 #define MAX 15
-#define sizedataf 50
+#define sizedataf 100
 
-typedef struct tests
+typedef struct test
 	{
 		int id;
+		char prio;			//H=priorité_haute M=priorité_moyenne B=priorité_basse
 		char type[MAX];
 		char duree[MAX];
 		char temperature[MAX];
-		struct tests *suiv;
+		char etat[MAX];			//en cours, prêt, fini
+		struct test *suiv;
 	}TST;
 
 
@@ -19,4 +21,5 @@ typedef struct tests
 TST* Insert_liste(TST* tete_list, TST* test);
 TST * Nouveau_test();
 TST* creerlist_file(FILE* fic);
-void Aff_list(TST* T);
+void Aff_list(TST* Tete);
+TST* tri_list_pr(TST* tete_list);

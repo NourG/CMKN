@@ -7,7 +7,7 @@
 int main()
 	{
 
-		TST* liste=NULL;
+		TST* liste=NULL;		//tete de liste
 		int f;
 		FILE *fp;
 
@@ -18,7 +18,7 @@ int main()
 				liste=creerlist_file(fp);
 				Aff_list(liste);
 			}
-		
+		//fp=NULL;
 		f=fclose(fp);
 		if(f!=0)
 			{
@@ -76,28 +76,34 @@ TST* Insert_liste(TST* tete_list, TST* test)
 						
 TST* creerlist_file(FILE* fic)			//crée une liste de test à partir de toutes les lignes d'un fichier
 	{
-	
 		TST* test1;
 		TST* tete=NULL;
 		char ligne[sizedataf];	
 		char* tmp;			//pointeur/extracteur  de chaine tampon
-		char*pt;			//pointeur 2 de chaine(type test) 
+		char*pt0;			//pointeur 0 de chaine(type test) 
+		char*pt1;			//pointeur 1 de caractère(priorité du test)
 		char*pt2;			//pointeur 3 de chaine(duree test)
 		char*pt3;			//pointeur 4 de chaine(temperature test)
+		char*pt4;			//pointeur 5 de chaine(etat test)
 				
 			while(fgets(ligne,sizedataf,fic)!=NULL)		//retire la 1ere ligne avec \n
 				{
 					ligne[strlen(ligne)-1]='\0';		//"		      " sans "
 					test1=Nouveau_test();
-					tmp=strtok_r(ligne," ",&pt);	//= fonction strtok() delimiteur d'espace blanc pas à pas  
-				
-					test1->id=atoi(tmp);			
-					tmp=strtok_r(pt," ",&pt2);
+				//traitement et affectation de chaque chaine séparé d'un espace = donnée d'un test de la liste. 
+					tmp=strtok_r(ligne," ",&pt0);	// fonction strtok_r() delimiteur d'espace blanc pas à pas  return a string in tmp
+					test1->id=atoi(tmp);
+					tmp=strtok_r(pt0," ",&pt1);	  
+					test1->prio=*tmp;		
+					tmp=strtok_r(pt1," ",&pt2);
 					strcpy(test1->type,tmp);
 					tmp=strtok_r(pt2," ",&pt3);
 					strcpy(test1->duree,tmp);
-					tmp=strtok_r(pt3," ",&tmp);
+					tmp=strtok_r(pt3," ",&pt4);
 					strcpy(test1->temperature,tmp);	
+					tmp=strtok_r(pt4," ",&tmp);
+					strcpy(test1->etat,tmp);
+	
 					tete=Insert_liste(tete,test1);	
 				}
 						
@@ -106,15 +112,15 @@ TST* creerlist_file(FILE* fic)			//crée une liste de test à partir de toutes l
 
 
 
-void Aff_list(TST* T)
+void Aff_list(TST* Tete)
 	{
 		int i_cpt = 0;
 		printf("***************************LISTE DE TESTS*********************************\n");
-		while(T != NULL)
+		while(Tete != NULL)
 			{ 
-				printf("id=%d\ttypetest=[%s]\tduree=[%s]\ttemperature=[%s]\n",T->id,T->type,T->duree,T->temperature);
+				printf("id=%d\tPriorité=[%c]\ttypetest=[%1s]\tduree=[%1s]\ttemperature=[%1s]\tetat=[%1s]\n",Tete->id,Tete->prio,Tete->type,Tete->duree,Tete->temperature,Tete->etat);
 				i_cpt++;
-				T = T->suiv;
+				Tete = Tete->suiv;
 			}
 		if(i_cpt == 0)
 			{
@@ -123,6 +129,17 @@ void Aff_list(TST* T)
 	}
 
 
+TST* tri_list_pr(TST* tete_list)
+	{
+		while(tete_list!=NULL)
+			{
+				
+				strcmp(tete_list->
+
+
+
+		return NULL;
+	}
 
 						
 
