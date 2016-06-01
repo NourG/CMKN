@@ -19,7 +19,8 @@ typedef struct test
 
 
 TST* Insert_liste(TST* tete_list, TST* test);
-TST * Nouveau_test();
-TST* creerlist_file(FILE* fic);
+TST * Nouveau_test(TST * N);
+TST* creerlist_file(FILE* fic,TST* test1);
 void Aff_list(TST* Tete);
 TST* tri_list_pr(TST* tete_list);
+TST* insBP(TST *T, TST *N);

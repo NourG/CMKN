@@ -8,6 +8,9 @@ int main()
 	{
 
 		TST* liste=NULL;		//tete de liste
+		TST* N=NULL;				//maillon/tete tmp --> insertion bonne place
+		TST* list_triee=NULL;
+		TST* test=NULL;
 		int f;
 		FILE *fp;
 
@@ -15,8 +18,8 @@ int main()
 		
 		if(fp!=NULL)
 			{	//Insere le premier maillon dans la tete de liste
-				liste=creerlist_file(fp);
-				Aff_list(liste);
+				liste=creerlist_file(fp,test);
+				//Aff_list(liste);
 			}
 		//fp=NULL;
 		f=fclose(fp);
@@ -24,14 +27,18 @@ int main()
 			{
 				printf("PB fermeture du fichier\n");
 			}	
+			N=Nouveau_test(N);
+			//tri
+			list_triee=insBP(N,liste);
+			Aff_list(list_triee);
 		return 0;
 	}
 
 //Création de la liste de tests selon les donnés entrés par l'utilisateur dans le datafile listetests.txt 
 
-TST * Nouveau_test()			//fct permettant la création d'un maillon. Maillon = test
+TST * Nouveau_test(TST * N)			//fct permettant la création d'un maillon. Maillon = test
 	{ 
-		TST * N;
+		
 		N=(TST*)malloc(sizeof(TST));
 		if( N == NULL)
 			{
@@ -74,9 +81,9 @@ TST* Insert_liste(TST* tete_list, TST* test)
 	}
 
 						
-TST* creerlist_file(FILE* fic)			//crée une liste de test à partir de toutes les lignes d'un fichier
+TST* creerlist_file(FILE* fic,TST* test1)			//crée une liste de test à partir de toutes les lignes d'un fichier
 	{
-		TST* test1;
+		
 		TST* tete=NULL;
 		char ligne[sizedataf];	
 		char* tmp;			//pointeur/extracteur  de chaine tampon
@@ -89,7 +96,7 @@ TST* creerlist_file(FILE* fic)			//crée une liste de test à partir de toutes l
 			while(fgets(ligne,sizedataf,fic)!=NULL)		//retire la 1ere ligne avec \n
 				{
 					ligne[strlen(ligne)-1]='\0';		//"		      " sans "
-					test1=Nouveau_test();
+					test1=Nouveau_test(test1);
 				//traitement et affectation de chaque chaine séparé d'un espace = donnée d'un test de la liste. 
 					tmp=strtok_r(ligne," ",&pt0);	// fonction strtok_r() delimiteur d'espace blanc pas à pas  return a string in tmp
 					test1->id=atoi(tmp);
@@ -131,15 +138,32 @@ void Aff_list(TST* Tete)
 
 TST* tri_list_pr(TST* tete_list)
 	{
-		while(tete_list!=NULL)
+		/*while(tete_list!=NULL)
 			{
-				
-				strcmp(tete_list->
+				if(tete_list->prio=='H')
+					{*/
+						
 
 
 
 		return NULL;
 	}
+
+TST* insBP(TST *T, TST *N)
+	{
+		if (T == NULL) 
+			return N;
+		if (N->prio=='H')
+			{
+				 N->suiv = T;
+				return N;
+			}
+		else
+			{
+				 T->suiv= insBP(T->suiv,N);
+				return T;
+			}
+	} /* fin insBP */
 
 						
 
