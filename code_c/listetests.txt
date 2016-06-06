@@ -1,5 +1,5 @@
-1 H etuve1 12h 50°c prêt
-2 B four 5h 80°c prêt
-3 H four2 7h 222°C prêt
-4 M four 80min 147°C prêt
-5 M etuve2 4h 70°C prêt
+1 H etuve1 12 00 00 50 prêt
+2 B four 5 00 10 80 prêt
+3 H four2 7 00 00 222 en_cours
+4 M four 1 20 00 147 fini
+5 M etuve2 4 00 00 70 prêt

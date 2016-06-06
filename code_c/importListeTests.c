@@ -8,8 +8,6 @@ int main()
 	{
 
 		TST* liste=NULL;		//tete de liste
-		TST* N=NULL;				//maillon/tete tmp --> insertion bonne place
-		TST* list_triee=NULL;
 		TST* test=NULL;
 		int f;
 		FILE *fp;
@@ -18,19 +16,15 @@ int main()
 		
 		if(fp!=NULL)
 			{	//Insere le premier maillon dans la tete de liste
+				
 				liste=creerlist_file(fp,test);
-				//Aff_list(liste);
+				Aff_list(liste);
 			}
-		//fp=NULL;
 		f=fclose(fp);
 		if(f!=0)
 			{
 				printf("PB fermeture du fichier\n");
 			}	
-			N=Nouveau_test(N);
-			//tri
-			list_triee=insBP(N,liste);
-			Aff_list(list_triee);
 		return 0;
 	}
 
@@ -83,37 +77,52 @@ TST* Insert_liste(TST* tete_list, TST* test)
 						
 TST* creerlist_file(FILE* fic,TST* test1)			//crée une liste de test à partir de toutes les lignes d'un fichier
 	{
-		
 		TST* tete=NULL;
 		char ligne[sizedataf];	
 		char* tmp;			//pointeur/extracteur  de chaine tampon
 		char*pt0;			//pointeur 0 de chaine(type test) 
 		char*pt1;			//pointeur 1 de caractère(priorité du test)
-		char*pt2;			//pointeur 3 de chaine(duree test)
-		char*pt3;			//pointeur 4 de chaine(temperature test)
-		char*pt4;			//pointeur 5 de chaine(etat test)
+		char*pt2;			//pointeur 2 de chaine( duree en heure test)
+		char*pt3;			//pointeur 3 de chaine(duree en minute test)
+		char*pt4;			//pointeur 4 de chaine(duree en seconde test)
+		char*pt5;			//pointeur 5 de chaine(temperature test)
+		char*pt6;			//pointeur 6 de chaine(etat test)
 				
 			while(fgets(ligne,sizedataf,fic)!=NULL)		//retire la 1ere ligne avec \n
 				{
-					ligne[strlen(ligne)-1]='\0';		//"		      " sans "
+					ligne[strlen(ligne)-1]='\0';		
 					test1=Nouveau_test(test1);
-				//traitement et affectation de chaque chaine séparé d'un espace = donnée d'un test de la liste. 
-					tmp=strtok_r(ligne," ",&pt0);	// fonction strtok_r() delimiteur d'espace blanc pas à pas  return a string in tmp
+					//traitement et affectation de chaque chaine séparé d'un espace = donnée d'un test de la liste. 
+					//fonction strtok_r() delimiteur d'espace blanc pas à pas return a string in tmp
+					//id
+					tmp=strtok_r(ligne," ",&pt0);	
 					test1->id=atoi(tmp);
+					//priorité
 					tmp=strtok_r(pt0," ",&pt1);	  
-					test1->prio=*tmp;		
+					test1->prio=*tmp;
+					//type
 					tmp=strtok_r(pt1," ",&pt2);
 					strcpy(test1->type,tmp);
+					//heure
 					tmp=strtok_r(pt2," ",&pt3);
-					strcpy(test1->duree,tmp);
+					test1->heure=atoi(tmp);
+					//minute
 					tmp=strtok_r(pt3," ",&pt4);
-					strcpy(test1->temperature,tmp);	
-					tmp=strtok_r(pt4," ",&tmp);
+					test1->minute=atoi(tmp);
+					//seconde
+					tmp=strtok_r(pt4," ",&pt5);
+					test1->sec=atoi(tmp);
+					//temperature
+					tmp=strtok_r(pt5," ",&pt6);
+					test1->temperature=atoi(tmp);
+					//etat
+					tmp=strtok_r(pt6," ",&tmp);
 					strcpy(test1->etat,tmp);
 	
+					//insertion de maillon dans la liste
 					tete=Insert_liste(tete,test1);	
-				}
-						
+					
+				}						
 		return tete;			//tete = @liste de tests
 	}
 
@@ -125,7 +134,7 @@ void Aff_list(TST* Tete)
 		printf("***************************LISTE DE TESTS*********************************\n");
 		while(Tete != NULL)
 			{ 
-				printf("id=%d\tPriorité=[%c]\ttypetest=[%1s]\tduree=[%1s]\ttemperature=[%1s]\tetat=[%1s]\n",Tete->id,Tete->prio,Tete->type,Tete->duree,Tete->temperature,Tete->etat);
+				printf("id=%d\tPriorité=[%c]\ttypetest=[%1s]\tduree=[%dh%dm%ds]\ttemperature=[%d°C]\tetat=[%1s]\n",Tete->id,Tete->prio,Tete->type,Tete->heure,Tete->minute,Tete->sec,Tete->temperature,Tete->etat);
 				i_cpt++;
 				Tete = Tete->suiv;
 			}
@@ -135,35 +144,7 @@ void Aff_list(TST* Tete)
 			}
 	}
 
-
-TST* tri_list_pr(TST* tete_list)
-	{
-		/*while(tete_list!=NULL)
-			{
-				if(tete_list->prio=='H')
-					{*/
-						
+//tri liste chainée sert à rien puisque lecture de la liste par l'opérateur juste état test va changer selon l'horloge et la durée de chaque test puis de l'emplacement des type de tests
 
 
-
-		return NULL;
-	}
-
-TST* insBP(TST *T, TST *N)
-	{
-		if (T == NULL) 
-			return N;
-		if (N->prio=='H')
-			{
-				 N->suiv = T;
-				return N;
-			}
-		else
-			{
-				 T->suiv= insBP(T->suiv,N);
-				return T;
-			}
-	} /* fin insBP */
-
-						
 
