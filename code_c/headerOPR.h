@@ -9,6 +9,7 @@ typedef struct operateur
 	{
 		int id;
 		char mouv[MAX];
+		char habilite[MAX];
 		int heure_arrivee;
 		int minute_arrivee;
 		int seconde_arrivee;
