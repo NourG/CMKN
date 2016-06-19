@@ -5,7 +5,7 @@
 #include "sprites/sprites.h"
 #include "sprites/fonction.c"
 #include "sprites/roads.c"
-#include "listes/thread_horloge.c"
+#include "listes/thread_Horloge.c"
 
 
 int main()

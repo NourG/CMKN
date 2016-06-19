@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <pthread.h>
+#include "LSTtests.h"
+#include "horloge_thread.h"
+
+
+
+
+
+int main(void)
+{
+
+    pthread_t th1, th2;
+    pthread_mutex_init(&verrou, NULL);
+	temps.seconde = 0;
+	temps.minute = -1;
+	temps.heure = -1;
+	temps.jour =-1;
+	temps.mois=-1; //c'est beau
+	temps.k=1;
+
+	//init_var(temps);
+    pthread_create(&th1, NULL, horloge,NULL);
+	usleep(200000);
+    pthread_create(&th2, NULL, lecture_horloge,NULL);
+
+
+    pthread_join(th1, NULL);
+    pthread_join(th2, NULL);
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
