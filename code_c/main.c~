@@ -5,7 +5,7 @@
 #include "sprites/sprites.h"
 #include "sprites/fonction.c"
 #include "sprites/roads.c"
-#include "listes/thread_Horloge.c"
+//#include "listes/thread_horloge.c"
 
 
 int main()
@@ -39,7 +39,7 @@ int main()
 	}
 	
 	//chargement image operateur
-	if ( !load_Sprite( &operateur1, "operateur2.bmp" ) )
+	if ( !load_Sprite( &operateur1, "sources_img/operateur2.bmp" ) )
 	{
 		printf("Erreur SDL \n");
 		SDL_Quit();

@@ -5,7 +5,7 @@
 #include "sprites/sprites.h"
 #include "sprites/fonction.c"
 #include "sprites/roads.c"
-#include "listes/thread_horloge.c"
+//#include "listes/thread_horloge.c"
 
 
 int main()
@@ -30,7 +30,7 @@ int main()
 	ecran = SDL_SetVideoMode(1370,900, 16, SDL_HWSURFACE);
 	SDL_FillRect(ecran,NULL,SDL_MapRGB(ecran->format,255,255,255));
 	SDL_Flip(ecran);
-	plan_labo=SDL_LoadBMP("salle_3D.bmp");
+	plan_labo=SDL_LoadBMP("sources_img/salle_3D.bmp");
 
 	if ( ecran == NULL )
 	{
@@ -39,7 +39,7 @@ int main()
 	}
 	
 	//chargement image operateur
-	if ( !load_Sprite( &operateur1, "operateur2.bmp" ) )
+	if ( !load_Sprite( &operateur1, "sources_img/operateur2.bmp" ) )
 	{
 		printf("Erreur SDL \n");
 		SDL_Quit();

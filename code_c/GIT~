@@ -1,0 +1,19 @@
+1- sudo git pull (pour importer les changements)
+2 - sudo gedit nom.c (pour lancer le fichier a modifier)
+enregrister le fichier
+3-git status (pour voir les modifs en rouge=)
+4- sudo git add nom.c (pour ajouter le fichier)
+5-git status (pour voir les modifs en vert)
+6- sudo git commit -a -m "le commentaire"
+7- sudo git push
+pour copier quelque chose dans le repertoire : sudo cp nom.fichier distination
+
+Il faut installer les bibliotheque tff et freetype
+
+voila commande : sudo apt-get install libsdl-ttf2.0 libsdl-ttf2.0-dev
+ et sudo apt-get install 
+gcc 'sdl-config --cflags --libs' -lSDL_image -lSDL_ttf -o main.c
+
+compilation : sudo gcc main.c -lSDL -o main -lSDL_image -lSDL_ttf 
+
+Excution : sudo ./main
