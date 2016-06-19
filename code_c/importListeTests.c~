@@ -90,7 +90,7 @@ TST* creerlist_file(FILE* fic,TST* test1)			//crée une liste de test à partir 
 				
 			while(fgets(ligne,sizedataf,fic)!=NULL)		//retire la 1ere ligne avec \n
 				{
-					ligne[strlen(ligne)-1]='\0';		
+					ligne[strlen(ligne)-1]='\0';		//"		      " sans "
 					test1=Nouveau_test(test1);
 					//traitement et affectation de chaque chaine séparé d'un espace = donnée d'un test de la liste. 
 					//fonction strtok_r() delimiteur d'espace blanc pas à pas return a string in tmp
