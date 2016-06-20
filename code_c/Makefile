@@ -1,6 +1,6 @@
 # commande pour compiler make compilation
 compilation: main.c
-	sudo gcc main.c -lSDL -o main
+	sudo gcc main.c -lSDL -lpthread -o main 
 	
 # commande pour simuler make simulation
 simulation: main.c

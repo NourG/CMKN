@@ -1,5 +1,3 @@
-#include <pthread.h>
-
 #include "LSTtests.h"
 #include "horloge_thread.h"
 

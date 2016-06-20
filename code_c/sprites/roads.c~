@@ -4,11 +4,11 @@ int road_1(Sprite *sprite)
 {
 
 
-if(sprite->destination.y > 250 && sprite->destination.x > 770)  // road1 on va en haut
+if(sprite->dest.y > 250 && sprite->dest.x > 770)  // road1 on va en haut
 			{
 			//deplacement sur y
 			sprite->orientation = HAUT;
-			sprite->destination.y -= sprite->vitesse;
+			sprite->dest.y -= sprite->vitesse;
 
 			//translation de l'animation
 			sprite->anim_courante++;
@@ -21,10 +21,10 @@ if(sprite->destination.y > 250 && sprite->destination.x > 770)  // road1 on va e
 				sprite->temps_anim_courante = sprite->temps_anim;
 			}
 			
-			else if(sprite->destination.y <= 250 && sprite->destination.x > 770) //puis a gauche
+			else if(sprite->dest.y <= 250 && sprite->dest.x > 770) //puis a gauche
 			{
 				sprite->orientation = GAUCHE;
-				sprite->destination.x -= sprite->vitesse;
+				sprite->dest.x -= sprite->vitesse;
 			
 				sprite->anim_courante++;
 					if (sprite->anim_courante >= sprite->total_anims)
@@ -35,10 +35,10 @@ if(sprite->destination.y > 250 && sprite->destination.x > 770)  // road1 on va e
 					sprite->temps_anim_courante = sprite->temps_anim;
 			}
 			
-			else if(sprite->destination.x <= 770 && sprite->destination.y <= 350) // puis en bas
+			else if(sprite->dest.x <= 770 && sprite->dest.y <= 350) // puis en bas
 			{
 				sprite->orientation = BAS;
-				sprite->destination.y += sprite->vitesse;
+				sprite->dest.y += sprite->vitesse;
 							
 				sprite->anim_courante++;
 					if (sprite->anim_courante >= sprite->total_anims)
@@ -49,10 +49,10 @@ if(sprite->destination.y > 250 && sprite->destination.x > 770)  // road1 on va e
 				sprite->temps_anim_courante = sprite->temps_anim;				
 			}
 			
-			else if (sprite->destination.y >= 350 && sprite->destination.x >= 230)  // puis a gauche
+			else if (sprite->dest.y >= 350 && sprite->dest.x >= 230)  // puis a gauche
 			{
 				sprite->orientation =GAUCHE;
-				sprite->destination.x -= sprite->vitesse;
+				sprite->dest.x -= sprite->vitesse;
 			
 				sprite->anim_courante++;
 					if (sprite->anim_courante >= sprite->total_anims)
@@ -63,7 +63,7 @@ if(sprite->destination.y > 250 && sprite->destination.x > 770)  // road1 on va e
 				sprite->temps_anim_courante = sprite->temps_anim;				
 			}
 			
-			else if (sprite->destination.x <= 230) //arret devant les ecrans de la salle des etuves 1
+			else if (sprite->dest.x <= 230) //arret devant les ecrans de la salle des etuves 1
 			{
 				sprite->orientation = BAS;
 				sprite->source.x = sprite->largeur * sprite->anim_courante;

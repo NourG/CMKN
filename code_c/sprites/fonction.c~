@@ -17,6 +17,15 @@ SDL_Surface *loadBmp(const char *fichier)
 		return NULL;
 	}
 	
+	/* Verification du format de l'image */
+	/*if ( (image->w != 128) || (image->h != 128) )
+	if ( image == NULL )
+	{
+		fprintf(stderr, "L'image du fichier %s doit être de taille 96*128 pixels.\n", fichier);
+		SDL_FreeSurface(image);
+		return NULL;
+	}*/
+	
 	return image;
 }
 

@@ -2,10 +2,13 @@
 #include <stdlib.h>
 #include <time.h>
 #include <SDL/SDL.h>
+#include <unistd.h>
+
 #include "sprites/sprites.h"
 #include "sprites/fonction.c"
 #include "sprites/roads.c"
-//#include "listes/thread_horloge.c"
+#include "listes/thread_horloge.c"
+
 
 
 int main()
@@ -30,7 +33,7 @@ int main()
 	ecran = SDL_SetVideoMode(1370,900, 16, SDL_HWSURFACE);
 	SDL_FillRect(ecran,NULL,SDL_MapRGB(ecran->format,255,255,255));
 	SDL_Flip(ecran);
-	plan_labo=SDL_LoadBMP("salle_3D.bmp");
+	plan_labo=SDL_LoadBMP("sources_img/salle_3D.bmp");
 
 	if ( ecran == NULL )
 	{
@@ -85,7 +88,7 @@ int main()
 			road_1(&operateur1);
 			
 			
-			SDL_BlitSurface( operateur1.image, &operateur1.source, ecran, &operateur1.dest );
+			SDL_BlitSurface( operateur1.image, &operateur1.source, ecran, &operateur1.destination );
 										
 			/* On met à jour de la zone d'affichage de la fenetre */
 			SDL_UpdateRect(ecran, 0, 0, 0, 0);
