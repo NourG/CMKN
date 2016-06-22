@@ -1,7 +1,15 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <pthread.h>
 #include "LSTtests.h"
 #include "horloge_thread.h"
 
-int thread_horloge(void)
+
+
+
+
+int main(void)
 {
 
     pthread_t th1, th2;
