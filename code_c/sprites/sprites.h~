@@ -1,4 +1,3 @@
-//fichier h contenant les declarations du main
 
 #define BAS	0
 #define GAUCHE	1
@@ -22,7 +21,7 @@ typedef struct
 	
 	SDL_Surface *image;
 	SDL_Rect source;
-	SDL_Rect destination;
+	SDL_Rect dest;
 
 	
 	// taille du sprite

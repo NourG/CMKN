@@ -1,5 +1,5 @@
-3 H produit1 47 Etuve1 Magma 00 12 00 07 00 00 222 33 prêt
-1 B Cannetes 27 Magma Four 12 00 00 06 30 00 50 100 prêt
-2 B Composants 14 Four Magma 5 00 10 05 21 10 80 250 prêt
-4 M produit2 33 Etuve1 Four 00 35 00 01 20 00 147 105 prêt
-5 M produit3 12 Magma Etuve1 00 45 00 04 00 00 70 66 prêt
+3 H produit1 47 Etuve1 0 12 0 222 prêt
+1 B Cannetes 27 Magma 2 0 0 100 prêt
+2 B Composants 14 Four 5 0 10 250 prêt
+4 M produit2 33 Etuve1 0 35 0 105 prêt
+5 M produit3 12 Magma 0 45 0 66 prêt

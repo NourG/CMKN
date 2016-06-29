@@ -1,4 +1,3 @@
-//fichier h contenant les declarations du main
 
 #define BAS	0
 #define GAUCHE	1

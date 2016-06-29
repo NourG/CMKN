@@ -46,8 +46,8 @@ int load_Sprite( Sprite *sprite, const char *image )
 	sprite->temps_anim_courante = 0;
 
 	// On definit ensuite les dimentions du sprite.
-	sprite->largeur = 42;
-	sprite->hauteur = 90;
+	sprite->largeur = 46;
+	sprite->hauteur = 77;
 	
 	//on effectue les reglages dynamiques
 	sprite->source.x = sprite->anim_courante * sprite->largeur;
@@ -55,8 +55,8 @@ int load_Sprite( Sprite *sprite, const char *image )
 	sprite->source.w = sprite->largeur;
 	sprite->source.h = sprite->hauteur;
 	
-	sprite->destination.x = 1000;
-	sprite->destination.y = 400;
+	sprite->destination.x = 1014;
+	sprite->destination.y = 470;
 
 	sprite->destination.w = sprite->largeur;
 	sprite->destination.h = sprite->hauteur;
