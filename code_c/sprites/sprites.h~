@@ -21,7 +21,7 @@ typedef struct
 	
 	SDL_Surface *image;
 	SDL_Rect source;
-	SDL_Rect dest;
+	SDL_Rect destination;
 
 	
 	// taille du sprite

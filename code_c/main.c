@@ -27,8 +27,7 @@ int SDL1(void *arg)//recupere la tete de liste
 	int tempsActuel = 0, tempsPrecedent = 0, compteur = 0;
 	SDL_Rect position;
 	Sprite operateur1;
-	 pthread_t th_h;
-
+	 
 	TTF_Font *police = NULL;
         SDL_Color couleurNoire = {0, 0, 0}, couleurBlanche = {255, 255, 255};
         char time[20] = ""; 
@@ -65,14 +64,15 @@ int SDL1(void *arg)//recupere la tete de liste
 
 
 
-	
-	
+	//MODIFICATION DES COORDONEES selon le numero du road
+		//road 5	operateur1.destination.x = 1000;
+			//operateur1.destination.y = 180;
 	
 	tempsActuel = SDL_GetTicks();
 	
-	//met dabordl'affichage ici Cedric
-	sprintf(time," %d\n",notre_temps.seconde);
-	
+ 	tempsActuel = SDL_GetTicks();
+    	//sprintf(time, "Temps : %d", compteur);
+    	sprintf(time," temps : %d",notre_temps.seconde);
 	horloge_sdl = TTF_RenderText_Shaded(police, time, couleurNoire, couleurBlanche);	
 	
 	while (!Fin)
@@ -99,25 +99,30 @@ int SDL1(void *arg)//recupere la tete de liste
 		SDL_FillRect(ecran, NULL, SDL_MapRGB(ecran->format, 255, 255, 255));
 		/* On recupère le temps écoulé en mili-secondes */
 
-
+		tempsActuel = SDL_GetTicks();
 		/* On regarde s'il est temps d'effectuer le prochain rendu */
 		if (tempsActuel - tempsPrecedent >= 100) /* Si 100ms au moins se sont écoulées */
 		{
 			/* un rendu toutes les 100 milli-secondes = 250 images par secondes */
-		
-			//remet l'affiche ici ensuite
-			sprintf(time," %d\n",notre_temps.seconde);
-			
+			compteur += 100;
+			sprintf(time, "Temps : %d", compteur);
+			pthread_mutex_lock(&verrou);
+			pthread_cond_wait (&condition1, &verrou);//mettre signal cond si on est pas en phase
+			notre_temps = temps;
+			pthread_mutex_unlock(&verrou);
+			sprintf(time," temps : %d",notre_temps.seconde);
 			SDL_FreeSurface(horloge_sdl); /* On supprime la surface précédente de la mémoire avant d'en charger une nouvelle (IMPORTANT) */
            		horloge_sdl = TTF_RenderText_Shaded(police, time, couleurNoire, couleurBlanche); 
 			tempsPrecedent = tempsActuel; /* On met à jour le tempsPrecedent */
 	
 			// on lance le road 
-			//road_1(&operateur1); //ZONE 1 VERS ZONE 3
+			road_1(&operateur1); //ZONE 1 VERS ZONE 3
 			//road_2(&operateur1);  //ZONE 1 VERS ZONE 2
 			//road_3(&operateur1);  //ZONE 1 VERS ZONE 3
 			//road_4(&operateur1);  //ZONE 1 VERS ZONE 5
 			
+						
+
 			//road_5(&operateur1);  //ZONE 2 VERS ZONE 3
 			//road_6(&operateur1);  //ZONE 2 VERS ZONE 4
 			
@@ -171,8 +176,8 @@ printf("lancement de l'horloge et get_liste---->press 0 \n");
 	{
         pthread_create(&th1, NULL, horloge,NULL);
 		usleep(200000);
-    	//pthread_create(&th2, NULL, lecture_horloge,NULL);//affiche l'horloge
-		//usleep(200000);
+    	pthread_create(&th2, NULL, lecture_horloge,NULL);//affiche l'horloge
+		usleep(200000);
 	pthread_create(&th4, NULL, data_horloge,NULL);//data horloge
 
 	pthread_create(&th3, NULL,get_liste,NULL);//recupere la tete de liste des test
@@ -181,13 +186,7 @@ printf("lancement de l'horloge et get_liste---->press 0 \n");
 	SDL_CreateThread(SDL1, NULL );
 
 	}
-	//printf("affichage sdl ->press 0\n");
-	//scanf("%d",&choix);
-	//if (choix==0)
-	//{
-
-        //SDL_CreateThread(SDL1, NULL );
-	//}
+	
 
 //lancement d'un test
 while(liste1!=NULL)
@@ -208,7 +207,7 @@ while(liste1!=NULL)
 				pthread_cond_signal (&condition); /* On délivre le signal : condition remplie */
 				pthread_mutex_unlock(&even);
 	pthread_join(th1, NULL);
-    //pthread_join(th2, NULL);
+    pthread_join(th2, NULL);
 	pthread_join(th4, NULL);
     return 0;
 }

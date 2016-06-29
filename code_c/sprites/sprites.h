@@ -3,6 +3,7 @@
 #define GAUCHE	1
 #define DROITE	2
 #define HAUT	3
+#define AUCUNE  9
 
 
 #define AUCUNE_DIRECTION	0
