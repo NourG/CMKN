@@ -55,15 +55,15 @@ int load_Sprite( Sprite *sprite, const char *image )
 	sprite->source.w = sprite->largeur;
 	sprite->source.h = sprite->hauteur;
 	
-	sprite->destination.x = 1014;
-	sprite->destination.y = 470;
+	//sprite->destination.x = 1014;
+	//sprite->destination.y = 470;
 
 	sprite->destination.w = sprite->largeur;
 	sprite->destination.h = sprite->hauteur;
 	
 	// on definit enfin la vitesse et la direction du sprite
 	sprite->vitesse = 30;
-	//sprite->direction = AUCUNE_DIRECTION;
+
 	
 	return 1;
 }

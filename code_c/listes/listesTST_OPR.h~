@@ -98,8 +98,8 @@ TST* Insert_liste(TST* tete_list, TST* test)
 		return tete_list;
 	}
 
-
-TST* creerlist_file(FILE* fic,TST* test1)			//crée une liste de test à partir de toutes les lignes d'un fichier
+				//crée une liste de test à partir de toutes les lignes d'un fichier
+TST* creerlist_file(FILE* fic,TST* test1)			
 	{
 		TST* tete=NULL;
 		char ligne[sizedataf];
@@ -291,4 +291,33 @@ void aff_listOPR(OPR* tete)
 				printf("\n Liste vide !!");
 			}
 
+	}
+
+
+int main_operator()
+	{
+		OPR* tete=NULL;
+		OPR* operateur=NULL;
+		FILE *fic;
+		int fc;
+		fic = fopen("sources_txt/caracoperateurs.txt","r");
+		
+		if(fic!=NULL)
+			{	//Insere le premier maillon dans la tete de liste
+				
+				tete=cree_operator_list(fic,operateur,tete);
+				
+			}
+		else
+			{	
+				printf("Erreur fichier\n");
+				return 1;
+			}
+		fc=fclose(fic);
+		aff_listOPR(tete);
+		if(fc!=0)
+			{
+				printf("PB fermeture du fichier\n");
+			}	
+		return 0;
 	}

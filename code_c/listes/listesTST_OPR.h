@@ -16,7 +16,7 @@ typedef struct test//ou produit ?
 		int heure_proc1,minute_proc1;		// durée du test dans la 1ere étape
 		//int heure_proc2,minute_proc2,sec_proc2;		// durée du test dans la 2e étape
 		int temperature1;		//température pour la 1ere etape et 2e etape
-		char etat[MAX];			//en cours, prêt, fini
+		char etat[MAX];			//en cours, prêt, fini			Aremplir !!
 		struct test *suiv;
 	}TST;
 
@@ -292,7 +292,6 @@ void aff_listOPR(OPR* tete)
 			}
 
 	}
-
 
 
 int main_operator()
