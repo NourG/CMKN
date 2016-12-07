@@ -1,6 +1,7 @@
 package ihm;
 
 import java.awt.EventQueue;
+import excel.*;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,6 +22,8 @@ import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Interface {
 
@@ -50,12 +53,23 @@ public class Interface {
 	private JButton button_16 = new JButton("/");
 	private JButton button_17 = new JButton("(-)");
 	private JButton btnIm = new JButton("Im");
+	
+
 	private JButton btnSv = new JButton("Sv");
 	private JTextField textField;
-	JButton btnY = new JButton("y");
+	private JButton btnY = new JButton("y");
 	private String expression_final="";
+	private static ArrayList<String> d1 = new ArrayList<String>();
 	
 	/**********************GETTERS & SETTERS*********************************/
+	public String getExpression_final() {
+		return expression_final;
+	}
+	
+	public void setExpression_final(String expression_final) {
+		this.expression_final = expression_final;
+	}
+
 	public JLabel getEcran() {
 		return ecran;
 	}
@@ -68,7 +82,7 @@ public class Interface {
 		return label_npi_field;
 	}
 
-	public void setLabel_npi_field(JLabel label_npi_field) {
+	public void setLabel_npi_field(JLabel Label_npi_field) {
 		this.label_npi_field = label_npi_field;
 	}
 
@@ -511,11 +525,28 @@ public class Interface {
 						.addComponent(btnEn)))
 		);
 		btnIm.addActionListener(new ActionListener() {		//touche import
+			int i = 0;
 			public void actionPerformed(ActionEvent e) {
+				
+				 ReadExcel test = new ReadExcel();
+	             test.setInputFile("resultatfinal.xls");
+	             try{
+	             d1=test.read();
+	             }
+	             catch(IOException a)
+	             {
+	            	 System.out.println(a.getMessage());
+	             }
+	            ecran.setText(d1.get(i));
+	            System.out.println("Importation réussi");
+	            i++;
 			}
 		});
-		btnEn.addActionListener(new ActionListener() {		//touche enter 
+		btnEn.addActionListener(new ActionListener() {		//touche enter = to string et affichage npi dans le champ
 			public void actionPerformed(ActionEvent e) {
+				/*setExpression_final(ecran.getText());
+				System.out.println(getExpression_final());ok*/
+				
 			}
 		});
 		button_1.addActionListener(new ActionListener() {	//touche = pour resultat
@@ -634,11 +665,6 @@ public class Interface {
 		
 	}
 	
-	private void calcul(){
-		expression_final = ecran.getText();
-		System.out.println(expression_final);
-	}
-	
 	/**
 	 * Launch the application. **********************MAIN****************************
 	 */
@@ -647,8 +673,12 @@ public class Interface {
 			public void run() {
 				try {
 					Interface window = new Interface();
+					//System.out.println(window.getExpression_final());
+					
 					window.frmCalculatrice.setVisible(true);
-					//window.calcul();
+					//window.setExpression_final("45");
+					//System.out.println(window.getExpression_final());
+					
 					
 				} catch (Exception e) {
 					e.printStackTrace();
