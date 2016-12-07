@@ -1,7 +1,9 @@
 package ihm;
 
 import java.awt.EventQueue;
+
 import excel.*;
+import npi.*;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,7 +11,6 @@ import java.awt.BorderLayout;
 import javax.swing.JTextField;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JToolBar;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import java.awt.Color;
@@ -20,8 +21,6 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.SystemColor;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -82,7 +81,7 @@ public class Interface {
 		return label_npi_field;
 	}
 
-	public void setLabel_npi_field(JLabel Label_npi_field) {
+	public void setLabel_npi_field(JLabel label_npi_field) {
 		this.label_npi_field = label_npi_field;
 	}
 
@@ -524,6 +523,7 @@ public class Interface {
 						.addComponent(button_1)
 						.addComponent(btnEn)))
 		);
+		/**********************************ACtion BOUTON*************************************/
 		btnIm.addActionListener(new ActionListener() {		//touche import
 			int i = 0;
 			public void actionPerformed(ActionEvent e) {
@@ -539,14 +539,28 @@ public class Interface {
 	             }
 	            ecran.setText(d1.get(i));
 	            System.out.println("Importation réussi");
+	            System.out.println("Appuyer sur En pour trouver l'expression en NPI ou charger une autre expression sur IM");
 	            i++;
 			}
 		});
 		btnEn.addActionListener(new ActionListener() {		//touche enter = to string et affichage npi dans le champ
+			int j=0;
 			public void actionPerformed(ActionEvent e) {
 				/*setExpression_final(ecran.getText());
 				System.out.println(getExpression_final());ok*/
-				
+				//String[] expression = str.split(" ");
+				String[] expression = d1.get(j).split(" ");	
+	    String[] expressionCONVERTIE;
+	    System.out.println("Le resultat de la Conversion est le suivant : ");
+	    
+	    expressionCONVERTIE = converter.expressionNPI(expression);
+	    for (String VAL : expressionCONVERTIE) {
+	            System.out.print(VAL + " ");	
+			    }
+	    System.out.println("");
+	    //System.out.println(expressionCONVERTIE);[Ljava.lang.String;@4f8f4471
+	    //System.out.println("Appuyer sur Sv pour enregistrer l'expression NPI dans npi.xls");
+	    	j++;
 			}
 		});
 		button_1.addActionListener(new ActionListener() {	//touche = pour resultat
@@ -555,6 +569,8 @@ public class Interface {
 		});
 		btnSv.addActionListener(new ActionListener() {	//touche Save
 			public void actionPerformed(ActionEvent e) {
+				
+			
 			}
 		});
 		button_6.addActionListener(new ActionListener() {	//touche ( 
@@ -673,7 +689,7 @@ public class Interface {
 			public void run() {
 				try {
 					Interface window = new Interface();
-					//System.out.println(window.getExpression_final());
+					System.out.println("Importer l'expression depuis la touche Im");
 					
 					window.frmCalculatrice.setVisible(true);
 					//window.setExpression_final("45");
